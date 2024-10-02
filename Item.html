@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <title>POS/Item</title>
+  <style>
+    /* Default styles for larger screens */
+    body{
+    background:black;
+    }
+
+    .container-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 1rem;
+    }
+
+    /* Styling for the form */
+    .form-section {
+        background: dodgerblue;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid red;
+    }
+
+    /* Styling for buttons */
+    .button-section {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        padding: 20px 0;
+    }
+
+    /* Styling for the table */
+    .table-section {
+        background: dodgerblue;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid cyan;
+        overflow-y: auto;
+    }
+
+    /* Responsive layout for small screens */
+    @media (max-width: 768px) {
+        /* Stack everything vertically */
+        .container-grid {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Full width for form and table */
+        .form-section,
+        .table-section {
+            width: 100%;
+        }
+
+        /* Make buttons stack vertically in mobile view */
+        .button-section {
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        /* Make the table responsive */
+        table {
+            width: 100%;
+        }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary" >
+  <div class="container-fluid" >
+    <img class="navbar-brand" src="asset/images/logo.png" style="width:5vw; height:auto;">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html" >Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Customer.html" >Customer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Item.html" >Item</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Order.html" >Order</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Main content in a grid layout -->
+<div class="container container-grid mt-4">
+  <!-- Register Item Form -->
+  <section class="form-section">
+    <h4>Register Item</h4>
+    <form class="row g-3" id="itemForm">
+      <div class="col-12">
+        <label for="itemName" class="form-label">Item Name</label>
+        <input type="text" class="form-control" id="itemName" placeholder="Item Name">
+      </div>
+      <div class="col-12">
+        <label for="itemID" class="form-label">Item ID</label>
+        <input type="text" class="form-control" id="itemID" placeholder="Item ID">
+      </div>
+      <div class="col-12">
+        <label for="quantity" class="form-label">Quantity</label>
+        <input type="text" class="form-control" id="quantity" placeholder="Quantity">
+      </div>
+      <div class="col-12">
+        <label for="price" class="form-label">Price</label>
+        <input type="text" class="form-control" id="price" placeholder="Price">
+      </div>
+    </form>
+  </section>
+
+  <!-- Item Table Section -->
+  <section class="table-section">
+    <h4>Item List</h4>
+    <form class="d-flex mb-3">
+      <input class="form-control me-2" type="search" placeholder="Search Items" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    <table class="table table-striped table-hover">
+      <thead>
+      <tr>
+        <th scope="col">Item ID</th>
+        <th scope="col">Item Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>10</td>
+        <td>$100</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>5</td>
+        <td>$50</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>20</td>
+        <td>$200</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
+
+<!-- Buttons below the form and table -->
+<section class="button-section">
+  <button type="submit" class="btn btn-primary">Register</button>
+  <button type="button" class="btn btn-outline-warning">Update</button>
+  <button type="reset" class="btn btn-outline-danger">Reset</button>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+
+</html>
