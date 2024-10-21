@@ -1,0 +1,64 @@
+/* Form and Table Section Styling */
+        body{
+    background:black;
+    }
+        .form-section, .table-section {
+            background: dodgerblue;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid red;
+            height: auto;
+        }
+
+        /* Buttons Section */
+        .button-section {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* Responsive Layout for smaller screens */
+        @media (max-width: 768px) {
+            .form-section, .table-section {
+                width: 100%;
+            }
+
+            .button-section {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+        }
+            /* Form and Table Section Styling */
+        body{
+    background:black;
+    }
+        .form-section, .table-section {
+            background: dodgerblue;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid red;
+            height: auto;
+        }
+
+        /* Buttons Section */
+        .button-section {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* Responsive Layout for smaller screens */
+        @media (max-width: 768px) {
+            .form-section, .table-section {
+                width: 100%;
+            }
+
+            .button-section {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+        }

@@ -1,0 +1,62 @@
+ /* Default styles for larger screens */
+    body{
+    background:black;
+    }
+
+    .container-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 1rem;
+    }
+
+    /* Styling for the form */
+    .form-section {
+        background: dodgerblue;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid red;
+    }
+
+    /* Styling for buttons */
+    .button-section {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        padding: 20px 0;
+    }
+
+    /* Styling for the table */
+    .table-section {
+        background: dodgerblue;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid cyan;
+        overflow-y: auto;
+    }
+
+    /* Responsive layout for small screens */
+    @media (max-width: 768px) {
+        /* Stack everything vertically */
+        .container-grid {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Full width for form and table */
+        .form-section,
+        .table-section {
+            width: 100%;
+        }
+
+        /* Make buttons stack vertically in mobile view */
+        .button-section {
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        /* Make the table responsive */
+        table {
+            width: 100%;
+        }
+    }
