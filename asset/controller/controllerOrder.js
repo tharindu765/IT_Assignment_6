@@ -1,11 +1,11 @@
-import OrderModel from "../models/orderModel.js"; // Adjust the import according to your structure
+import OrderModel from "../models/orderModel.js";
 import { CustomerArr, ItemArr, OrderArr } from "../db/database.js";
 
-let currentOrderIndex = -1; // For selecting an order
-let orderIDCounter = 1; // To generate unique order IDs
-let isCartMode = false; // Flag to indicate if we are in cart mode
-let temporaryOrders = []; // Temporary storage for cart items
-let currentOrderID = null; // To keep track of the current order ID being used in the cart
+let currentOrderIndex = -1;
+let orderIDCounter = 1;
+let isCartMode = false;
+let temporaryOrders = [];
+let currentOrderID = null;
 
 // Load Customer Dropdown
 export const loadCustomerOptions = () => {
@@ -60,7 +60,7 @@ const calculateTotalPrice = (itemPrice, quantity) => itemPrice * quantity;
 
 // Add Item to Temporary Order (Cart)
 $("#AddToCart").on("click", (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
 
     let customer = $("#customerSelect option:selected").text();
     let item = $("#itemSelect option:selected").text().split(" - ")[0];
@@ -86,19 +86,19 @@ $("#AddToCart").on("click", (event) => {
         return;
     }
 
-    // If it's the first item being added for this order, assign a new order ID
+
     if (temporaryOrders.length === 0 || temporaryOrders[0].customer !== customer) {
-        currentOrderID = orderIDCounter++; // Assign a new order ID for the first item
+        currentOrderID = orderIDCounter++;
     }
 
     let totalPrice = calculateTotalPrice(itemPrice, quantity);
     let newOrder = new OrderModel(currentOrderID, customer, item, quantity, totalPrice);
-    temporaryOrders.push(newOrder); // Add to temporary orders
+    temporaryOrders.push(newOrder);
 
-    // Load the temporary orders into the table
-    isCartMode = true; // Set the mode to cart mode
-    loadOrders(); // Update the order table to show temporary orders
-    clearOrderForm(); // Clear form fields
+
+    isCartMode = true;
+    loadOrders();
+    clearOrderForm();
 });
 
 // Place Order
@@ -112,22 +112,22 @@ $("#palaceOrder").on("click", () => {
         return;
     }
 
-    // Transfer temporary orders to the main orders array
+
     temporaryOrders.forEach(order => {
         OrderArr.push(order);
     });
 
-    temporaryOrders = []; // Clear temporary orders after placing
-    isCartMode = false; // Switch back to normal order display
-    currentOrderID = null; // Reset the current order ID
-    loadOrders(); // Update the real orders table
-    clearOrderForm(); // Clear form fields
+    temporaryOrders = [];
+    isCartMode = false;
+    currentOrderID = null;
+    loadOrders();
+    clearOrderForm();
 });
 
-// Initialize Dropdowns and Orders on Page Load
+
 $(document).ready(() => {
     loadCustomerOptions();
     loadItemOptions();
-    loadOrders(); // Load orders initially
+    loadOrders();
     console.log("Page loaded and dropdowns initialized.");
 });
