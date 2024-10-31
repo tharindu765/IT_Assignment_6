@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="asset/style/customer.css">
     <link rel="stylesheet" href="asset/style/item.css">
     <link rel="stylesheet" href="asset/style/order.css">
+<!--    <link rel="stylesheet" href="sweetalert2.min.css">-->
     <title>POS</title>
     <style>
         #heeee{
@@ -111,7 +112,40 @@
         overflow-y: auto;
         border: 2px solid cyan;
     }
+// Select customer for update
+    $("#customerTable tbody").on("click", "tr", function() {
+        currentIndex = $(this).index();
+        let selectedCustomer = CustomerArr[currentIndex];
 
+        $("#inputName").val(selectedCustomer.name);
+        $("#inputNIC").val(selectedCustomer.nic);
+        $("#inputAddress").val(selectedCustomer.address);
+        $("#inputContact").val(selectedCustomer.contact);
+    });
+
+    // Update customer information
+    $("#customerUpdate").on("click", () => {
+        if (currentIndex === -1) {
+            alert("Please select a customer to update.");
+            return;
+        }
+
+        let updatedCustomer = {
+            name: $("#inputName").val(),
+            nic: $("#inputNIC").val(),
+            address: $("#inputAddress").val(),
+            contact: $("#inputContact").val()
+        };
+
+        CustomerArr[currentIndex] = updatedCustomer;
+
+        $("#inputName").val('');
+        $("#inputNIC").val('');
+        $("#inputAddress").val('');
+        $("#inputContact").val('');
+        currentIndex = -1; // Reset index after updating
+        loadCustomer();
+    });
     /* Responsive layout for small screens */
     @media (max-width: 768px) {
         .container-grid {
@@ -143,7 +177,7 @@
 <!-- New Navigation Bar -->
 <nav id="nav" class="navbar navbar-expand-lg bg-dark">
     <div class="container-fluid" style="color:white;">
-        <img class="navbar-brand" src="asset/images/logo.png" style="width:5vw; height:auto;">
+        <img class="navbar-brand" alt="logo" src="asset/images/logo.png" style="width:5vw; height:auto;">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -227,31 +261,35 @@
         <section class="table-section">
             <h4>Customer List</h4>
             <!-- Search bar for the customer table -->
-            <input class="form-control mb-3" id="searchBar" type="text" placeholder="Search customers...">
+            <input class="form-control mb-3" id="searchBar" type="search" placeholder="Search customers..." aria-label="Search">
             <table class="table table-striped table-hover" id="customerTable">
                 <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">Customer ID</th>
+                    <th scope="col">NIC</th>
                     <th scope="col">Name</th>
                     <th scope="col">Address</th>
                     <th scope="col">Contact</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody">
                 <tr>
                     <th scope="row">1</th>
+                    <td>1203405</td>
                     <td>Mark</td>
                     <td>Otto</td>
                     <td>@mdo</td>
                 </tr>
                 <tr>
                     <th scope="row">2</th>
+                    <td>1203405</td>
                     <td>Jacob</td>
                     <td>Thornton</td>
                     <td>@fat</td>
                 </tr>
                 <tr>
                     <th scope="row">3</th>
+                    <td>1203405</td>
                     <td>Larry</td>
                     <td>Bird</td>
                     <td>@twitter</td>
@@ -262,9 +300,9 @@
     </div>
     <!-- Action Buttons (Register, Update, Reset) outside the grid -->
     <div class="action-buttons">
-        <button type="submit" class="btn btn-primary">Register</button>
-        <button type="button" class="btn btn-outline-warning">Update</button>
-        <button type="reset" class="btn btn-danger">Reset</button>
+        <button id="customerSave" type="submit" class="btn btn-primary">Register</button>
+        <button id="customerUpdate" type="button" class="btn btn-outline-warning">Update</button>
+        <button id="customerDelete" type="button" class="btn btn-danger">delete</button>
     </div>
 </div>
 
@@ -302,7 +340,7 @@
                 <input class="form-control me-2" type="search" placeholder="Search Items" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-            <table class="table table-striped table-hover">
+            <table id="itemTable" class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th scope="col">Item ID</th>
@@ -336,9 +374,9 @@
     </div>
     <!-- Buttons below the form and table -->
     <section class="button-section">
-        <button type="submit" class="btn btn-primary">Register</button>
-        <button type="button" class="btn btn-outline-warning">Update</button>
-        <button type="reset" class="btn btn-outline-danger">Reset</button>
+        <button id="itemSave" type="submit" class="btn btn-primary">Register</button>
+        <button id="itemUpdate" type="button" class="btn btn-outline-warning">Update</button>
+        <button id="itemDelete" type="button" class="btn btn-outline-danger">Reset</button>
     </section>
 </div>
 
@@ -379,7 +417,7 @@
 
             <!-- Submit Order Button -->
             <div class="col-12">
-                <button type="submit" class="btn btn-primary w-100">Add To Cart</button>
+                <button id="AddToCart" type="submit" class="btn btn-primary w-100">Add To Cart</button>
             </div>
         </form>
     </section>
@@ -390,11 +428,11 @@
         <!-- Search Section inside the table -->
         <form class="d-flex mb-3" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button id="Search" class="btn btn-outline-success" type="submit">Search</button>
         </form>
 
         <!-- Order Table -->
-        <table class="table table-striped table-hover">
+        <table id="orderTable" class="table table-striped table-hover">
             <thead>
             <tr>
                 <th scope="col">Order ID</th>
@@ -431,13 +469,23 @@
 
         <!-- Button Section below the table -->
         <div class="button-section">
-            <button type="button" class="btn btn-primary w-100">Place Order</button>
-            <button type="button" class="btn btn-outline-warning">Update</button>
-            <button type="button" class="btn btn-outline-danger">Reset</button>
+            <button id="palaceOrder" type="button" class="btn btn-primary w-100">Place Order</button>
+            <button id="update" type="button" class="btn btn-outline-warning">Update</button>
+            <button id="delete" type="button" class="btn btn-outline-danger">Delete</button>
         </div>
     </section>
 
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!--<script src="sweetalert2.all.min.js"></script>-->
+
+<script type="module" src="asset/controller/controllerCustomer.js"></script>
+<script type="module" src="asset/controller/controllerItem.js"></script>
+<script type="module" src="asset/controller/controllerOrder.js"></script>
+
 <script>
 const heeee = document.getElementById("heeee");
 const customerSection = document.getElementById("customerSection");

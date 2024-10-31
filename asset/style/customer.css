@@ -32,7 +32,8 @@
         color:white;
         padding: 20px;
         border-radius: 10px;
-        overflow-y: auto;
+        max-height:71vh;
+        overflow-y: hidden;
         border: 2px solid cyan;
     }
 
